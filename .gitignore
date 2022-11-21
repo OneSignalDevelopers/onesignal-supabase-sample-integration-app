@@ -45,3 +45,4 @@ app.*.map.json
 
 # Project specific
 .DS_Store
+.vscode/settings.json
