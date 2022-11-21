@@ -15,6 +15,7 @@ dependencies:
   http: ^0.13.1
   font_awesome_flutter: ^9.2.0
   platform: ^3.0.0
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,7 @@ flutter:
 
   assets:
     - assets/
+    - .env
 
   fonts:
     - family: OtomanopeeOne

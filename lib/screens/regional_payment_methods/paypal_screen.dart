@@ -31,7 +31,7 @@ class _PayPalScreenState extends State<PayPalScreen> {
   }
 
   Future<Map<String, dynamic>> _createPaymentIntent() async {
-    final url = Uri.parse('$kApiUrl/create-payment-intent');
+    final url = Uri.parse('$paymentProcessorUrl/create-payment-intent');
     final response = await http.post(
       url,
       headers: {

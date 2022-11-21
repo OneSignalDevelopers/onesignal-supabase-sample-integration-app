@@ -28,7 +28,7 @@ class _FinancialConnectionsScreenState
   }
 
   Future<Map<String, dynamic>> _financialConnectionsSheet() async {
-    final url = Uri.parse('$kApiUrl/financial-connections-sheet');
+    final url = Uri.parse('$paymentProcessorUrl/financial-connections-sheet');
     final response = await http.post(
       url,
       headers: {

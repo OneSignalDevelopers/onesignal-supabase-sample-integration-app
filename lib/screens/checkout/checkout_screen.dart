@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:app/.env.dart';
+import 'package:app/config.dart';
 import 'package:app/widgets/example_scaffold.dart';
 import '../../config.dart';
 import 'platforms/stripe_checkout.dart'
@@ -62,7 +62,7 @@ class _CheckoutScreenExample extends State<CheckoutScreenExample> {
   }
 
   Future<String> _createCheckoutSession() async {
-    final url = Uri.parse('$kApiUrl/create-checkout-session');
+    final url = Uri.parse('$paymentProcessorUrl/create-checkout-session');
     final response = await http.post(
       url,
       headers: {

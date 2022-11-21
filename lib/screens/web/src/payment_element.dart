@@ -63,7 +63,7 @@ class _ThemeCardExampleState extends State<PaymentElementExample> {
   }
 
   Future<String> createPaymentIntent() async {
-    final url = Uri.parse('$kApiUrl/universal-payment');
+    final url = Uri.parse('$paymentProcessorUrl/universal-payment');
     final response = await http.post(
       url,
       headers: {

@@ -108,7 +108,7 @@ class _ApplePayScreenState extends State<ApplePayScreen> {
   }
 
   Future<Map<String, dynamic>> fetchPaymentIntentClientSecret() async {
-    final url = Uri.parse('$kApiUrl/create-payment-intent');
+    final url = Uri.parse('$paymentProcessorUrl/create-payment-intent');
     final response = await http.post(
       url,
       headers: {

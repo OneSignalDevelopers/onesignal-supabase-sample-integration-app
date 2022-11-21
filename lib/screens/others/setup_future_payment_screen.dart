@@ -208,7 +208,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
   }
 
   Future<String> _createSetupIntentOnBackend(String email) async {
-    final url = Uri.parse('$kApiUrl/create-setup-intent');
+    final url = Uri.parse('$paymentProcessorUrl/create-setup-intent');
     final response = await http.post(
       url,
       headers: {
@@ -226,7 +226,7 @@ class _SetupFuturePaymentScreenState extends State<SetupFuturePaymentScreen> {
   }
 
   Future<Map<String, dynamic>> _chargeCardOffSession() async {
-    final url = Uri.parse('$kApiUrl/charge-card-off-session');
+    final url = Uri.parse('$paymentProcessorUrl/charge-card-off-session');
     final response = await http.post(
       url,
       headers: {

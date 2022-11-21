@@ -98,7 +98,7 @@ class _CVCReCollectionScreenState extends State<CVCReCollectionScreen> {
   Future<Map<String, dynamic>> _callChargeCardOffSession({
     required String email,
   }) async {
-    final url = Uri.parse('$kApiUrl/charge-card-off-session');
+    final url = Uri.parse('$paymentProcessorUrl/charge-card-off-session');
     final response = await http.post(
       url,
       headers: {
@@ -112,7 +112,8 @@ class _CVCReCollectionScreenState extends State<CVCReCollectionScreen> {
   }
 
   Future<Map<String, dynamic>> _fetchPaymentIntentWithPaymentMethod() async {
-    final url = Uri.parse('$kApiUrl/create-payment-intent-with-payment-method');
+    final url = Uri.parse(
+        '$paymentProcessorUrl/create-payment-intent-with-payment-method');
     final response = await http.post(
       url,
       headers: {
