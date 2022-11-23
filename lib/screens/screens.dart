@@ -1,3 +1,6 @@
+import 'package:app/screens/auth/auth_screen.dart';
+import 'package:app/screens/auth/login_screen.dart';
+import 'package:app/screens/auth/profile_form.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/checkout/checkout_screen.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen.dart';
@@ -45,7 +48,7 @@ class ExampleSection extends StatelessWidget {
     return ExpansionTile(
       backgroundColor: Theme.of(context).primaryColor.withOpacity(0.2),
       initiallyExpanded: expanded,
-      childrenPadding: EdgeInsets.only(left: 20),
+      childrenPadding: const EdgeInsets.only(left: 20),
       title: Text(title),
       children:
           ListTile.divideTiles(tiles: children, context: context).toList(),
@@ -61,7 +64,8 @@ class Example extends StatelessWidget {
 
   final WidgetBuilder builder;
 
-  Example({
+  const Example({
+    super.key,
     required this.title,
     required this.builder,
     this.style,
@@ -77,10 +81,10 @@ class Example extends StatelessWidget {
         Navigator.push(context, route);
       },
       title: Text(title, style: style),
-      leading: this.leading,
+      leading: leading,
       trailing: Row(mainAxisSize: MainAxisSize.min, children: [
         PlatformIcons(supported: platformsSupported),
-        Icon(Icons.chevron_right_rounded),
+        const Icon(Icons.chevron_right_rounded),
       ]),
     );
   }
@@ -88,209 +92,43 @@ class Example extends StatelessWidget {
   static List<Example> paymentMethodScreens = [];
 
   static List<Widget> screens = [
+    ExampleSection(title: 'Auth', children: [
+      Example(
+        title: 'Profile',
+        builder: (c) => const ProfileForm(),
+        platformsSupported: const [
+          DevicePlatform.android,
+          DevicePlatform.ios,
+          DevicePlatform.web
+        ],
+      ),
+    ]),
     ExampleSection(
       title: 'Payment Sheet',
+      expanded: true,
       children: [
         Example(
           title: 'Single Step',
-          builder: (context) => PaymentSheetScreen(),
-          platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
+          builder: (context) => const PaymentSheetScreen(),
+          platformsSupported: const [
+            DevicePlatform.android,
+            DevicePlatform.ios
+          ],
         ),
         Example(
           title: 'Custom Flow',
           builder: (context) => PaymentSheetScreenWithCustomFlow(),
-          platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-        ),
-      ],
-      expanded: true,
-    ),
-    ExampleSection(
-      title: 'Card Payments',
-      children: [
-        Example(
-          title: 'Simple - Using webhooks',
-          style: TextStyle(fontWeight: FontWeight.w600),
-          builder: (c) => WebhookPaymentScreen(),
-        ),
-        Example(
-          title: 'Without webhooks',
-          builder: (c) => NoWebhookPaymentScreen(),
-        ),
-        Example(
-          title: 'Card Field themes',
-          builder: (c) => ThemeCardExample(),
-        ),
-        Example(
-          title: 'Card Form',
-          builder: (c) => NoWebhookPaymentCardFormScreen(),
-          platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-        ),
-        Example(
-          title: 'Flutter UI (not PCI compliant)',
-          builder: (c) => CustomCardPaymentScreen(),
-          platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-        ),
-      ],
-    ),
-    ExampleSection(
-      title: 'Wallets',
-      children: [
-        Example(
-          title: 'Apple Pay',
-          leading: Image.asset(
-            'assets/apple_pay.png',
-            width: 48,
-          ),
-          builder: (c) => ApplePayScreen(),
-          platformsSupported: [DevicePlatform.ios],
-        ),
-        Example(
-          title: 'Apple Pay - Pay Plugin',
-          leading: Image.asset(
-            'assets/apple_pay.png',
-            width: 48,
-          ),
-          builder: (c) => ApplePayExternalPluginScreen(),
-          platformsSupported: [DevicePlatform.ios],
-        ),
-        Example(
-          title: 'Open Apple Pay setup',
-          leading: Image.asset(
-            'assets/apple_pay.png',
-            width: 48,
-          ),
-          builder: (c) => OpenApplePaySetup(),
-          platformsSupported: [DevicePlatform.ios],
-        ),
-        Example(
-          leading: Image.asset(
-            'assets/google_play.png',
-            width: 48,
-          ),
-          title: 'Google Pay',
-          builder: (c) => GooglePayStripeScreen(),
-          platformsSupported: [DevicePlatform.android],
-        ),
-        Example(
-          leading: Image.asset(
-            'assets/google_play.png',
-            width: 48,
-          ),
-          title: 'Google Pay - Pay Plugin',
-          builder: (c) => GooglePayScreen(),
-          platformsSupported: [DevicePlatform.android],
-        ),
-      ],
-    ),
-    ExampleSection(title: 'Regional Payment Methods', children: [
-      Example(
-        title: 'Ali Pay',
-        leading: Image.asset(
-          'assets/alipay.png',
-          width: 48,
-        ),
-        builder: (context) => AliPayScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Ideal',
-        leading: Image.asset(
-          'assets/ideal_pay.png',
-          width: 48,
-        ),
-        builder: (context) => IdealScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Aubecs',
-        builder: (context) => AubecsExample(),
-      ),
-      Example(
-        title: 'Fpx',
-        leading: Image.asset(
-          'assets/fpx.png',
-          width: 48,
-        ),
-        builder: (contex) => FpxScreen(),
-      ),
-      Example(
-        title: 'Grab pay',
-        leading: Image.asset(
-          'assets/grab_pay.png',
-          width: 48,
-        ),
-        builder: (contex) => GrabPayScreen(),
-      ),
-      Example(
-        title: 'Klarna',
-        leading: Image.asset(
-          'assets/klarna.jpg',
-          width: 48,
-        ),
-        builder: (contex) => KlarnaScreen(),
-      ),
-      Example(
-        title: 'PayPal',
-        leading: Image.asset(
-          'assets/paypal.png',
-          width: 48,
-        ),
-        builder: (contex) => PayPalScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Us bank accounts (ACH)',
-        builder: (contex) => UsBankAccountScreen(),
-      ),
-      // TODO: uncomment when we can re-enable wechat pay
-      // Example(
-      //   title: 'WeChat Pay',
-      //   leading: Image.asset(
-      //     'assets/wechat_pay.png',
-      //     width: 48,
-      //   ),
-      //   builder: (context) => WeChatPayScreen(),
-      // ),
-    ]),
-    ExampleSection(
-      title: 'Financial connections',
-      children: [
-        Example(
-          title: 'Financial connection sessions',
-          builder: (_) => FinancialConnectionsScreen(),
-          platformsSupported: [
+          platformsSupported: const [
             DevicePlatform.android,
-            DevicePlatform.ios,
+            DevicePlatform.ios
           ],
         ),
       ],
     ),
-    ExampleSection(title: 'Others', children: [
-      Example(
-        title: 'Setup Future Payment',
-        builder: (c) => SetupFuturePaymentScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Re-collect CVC',
-        builder: (c) => CVCReCollectionScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Create token for card (legacy)',
-        builder: (context) => LegacyTokenCardScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-      Example(
-        title: 'Create token for bank (legacy)',
-        builder: (context) => LegacyTokenBankScreen(),
-        platformsSupported: [DevicePlatform.android, DevicePlatform.ios],
-      ),
-    ]),
     Example(
       title: 'Checkout',
       builder: (c) => CheckoutScreenExample(),
-      platformsSupported: [
+      platformsSupported: const [
         DevicePlatform.android,
         DevicePlatform.ios,
         DevicePlatform.web

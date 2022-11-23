@@ -22,21 +22,21 @@ class ExampleScaffold extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(title, style: Theme.of(context).textTheme.headline5),
-              padding: EdgeInsets.symmetric(horizontal: 20),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   for (final tag in tags) Chip(label: Text(tag)),
                 ],
               ),
-              padding: EdgeInsets.symmetric(horizontal: 20),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (padding != null)
               Padding(
                 padding: padding!,

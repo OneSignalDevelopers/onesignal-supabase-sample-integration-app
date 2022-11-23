@@ -1,14 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:http/http.dart' as http;
-import 'package:app/config.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
 import 'package:app/widgets/example_scaffold.dart';
 import 'package:app/widgets/loading_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+final client = Supabase.instance.client;
 
 class PaymentSheetScreen extends StatefulWidget {
+  const PaymentSheetScreen({super.key});
+
   @override
   _PaymentSheetScreenState createState() => _PaymentSheetScreenState();
 }
@@ -20,21 +21,21 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Payment Sheet',
-      tags: ['Single Step'],
+      tags: const ['Single Step'],
       children: [
         Stepper(
           controlsBuilder: emptyControlBuilder,
           currentStep: step,
           steps: [
             Step(
-              title: Text('Init payment'),
+              title: const Text('Init payment'),
               content: LoadingButton(
                 onPressed: initPaymentSheet,
                 text: 'Init payment sheet',
               ),
             ),
             Step(
-              title: Text('Confirm payment'),
+              title: const Text('Confirm payment'),
               content: LoadingButton(
                 onPressed: confirmPayment,
                 text: 'Pay now',
@@ -46,31 +47,13 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
     );
   }
 
-  Future<Map<String, dynamic>> _createTestPaymentSheet() async {
-    final url = Uri.parse('$paymentProcessorUrl/payment-sheet');
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'a': 'a',
-      }),
-    );
-    final body = json.decode(response.body);
-    if (body['error'] != null) {
-      throw Exception(body['error']);
-    }
-    return body;
-  }
-
   Future<void> initPaymentSheet() async {
     try {
       // 1. create payment intent on the server
-      final data = await _createTestPaymentSheet();
+      final functionRes = await client.functions.invoke('payment-sheet');
 
-      // create some billingdetails
-      final billingDetails = BillingDetails(
+      // 1. create some billingdetails
+      const billingDetails = BillingDetails(
         name: 'Flutter Stripe',
         email: 'email@stripe.com',
         phone: '+48888000888',
@@ -88,21 +71,21 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           // Main params
-          paymentIntentClientSecret: data['paymentIntent'],
+          paymentIntentClientSecret: functionRes.data['paymentIntent'],
           merchantDisplayName: 'Flutter Stripe Store Demo',
           // Customer params
-          customerId: data['customer'],
-          customerEphemeralKeySecret: data['ephemeralKey'],
+          customerId: functionRes.data['customer'],
+          customerEphemeralKeySecret: functionRes.data['ephemeralKey'],
           // Extra params
-          applePay: PaymentSheetApplePay(
+          applePay: const PaymentSheetApplePay(
             merchantCountryCode: 'DE',
           ),
-          googlePay: PaymentSheetGooglePay(
+          googlePay: const PaymentSheetGooglePay(
             merchantCountryCode: 'DE',
             testEnv: true,
           ),
           style: ThemeMode.dark,
-          appearance: PaymentSheetAppearance(
+          appearance: const PaymentSheetAppearance(
             colors: PaymentSheetAppearanceColors(
               background: Colors.lightBlue,
               primary: Colors.blue,
@@ -147,7 +130,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Payment succesfully completed'),
         ),
       );

@@ -1,13 +1,20 @@
+import 'package:app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:app/config.dart';
-import 'screens/screens.dart';
+import 'screens/auth/login_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: ".env");
+
+  await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  );
   Stripe.publishableKey = stripePublishableKey;
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   await Stripe.instance.applySettings();
@@ -41,23 +48,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  User? _user;
+
   @override
   void initState() {
+    _getAuth();
     super.initState();
+  }
+
+  Future<void> _getAuth() async {
+    setState(() {
+      _user = Supabase.instance.client.auth.currentUser;
+    });
+
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      setState(() {
+        _user = data.session?.user;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stripe Examples'),
-      ),
-      body: ListView(children: [
-        ...ListTile.divideTiles(
-          context: context,
-          tiles: [for (final example in Example.screens) example],
+        appBar: AppBar(
+          title: const Text('Stripe Examples'),
         ),
-      ]),
-    );
+        body: _user == null
+            ? const LoginForm()
+            : ListView(children: [
+                ...ListTile.divideTiles(
+                    context: context,
+                    tiles: [for (final example in Example.screens) example])
+              ]));
   }
 }
