@@ -51,7 +51,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
     try {
       // 1. create payment intent on the server
       final FunctionResponse functionRes =
-          await client!.functions.invoke('payment-sheet');
+          await client.functions.invoke('payment-sheet');
 
       // 1. create some billingdetails
       const billingDetails = BillingDetails(
