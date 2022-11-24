@@ -50,7 +50,8 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
   Future<void> initPaymentSheet() async {
     try {
       // 1. create payment intent on the server
-      final functionRes = await client.functions.invoke('payment-sheet');
+      final FunctionResponse functionRes =
+          await client!.functions.invoke('payment-sheet');
 
       // 1. create some billingdetails
       const billingDetails = BillingDetails(
@@ -77,13 +78,13 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
           customerId: functionRes.data['customer'],
           customerEphemeralKeySecret: functionRes.data['ephemeralKey'],
           // Extra params
-          applePay: const PaymentSheetApplePay(
-            merchantCountryCode: 'DE',
-          ),
-          googlePay: const PaymentSheetGooglePay(
-            merchantCountryCode: 'DE',
-            testEnv: true,
-          ),
+          // applePay: const PaymentSheetApplePay(
+          //   merchantCountryCode: 'US',
+          // ),
+          // googlePay: const PaymentSheetGooglePay(
+          //   merchantCountryCode: 'US',
+          //   testEnv: true,
+          // ),
           style: ThemeMode.dark,
           appearance: const PaymentSheetAppearance(
             colors: PaymentSheetAppearanceColors(
