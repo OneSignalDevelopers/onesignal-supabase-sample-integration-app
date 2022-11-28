@@ -5,6 +5,7 @@ import 'package:app/config.dart';
 import 'screens/auth/login_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,13 @@ void main() async {
   Stripe.publishableKey = stripePublishableKey;
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   await Stripe.instance.applySettings();
+
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setAppId(onesignalAppId);
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
 
   runApp(const MyApp());
 }

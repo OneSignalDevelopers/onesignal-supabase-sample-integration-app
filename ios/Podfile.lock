@@ -2,6 +2,19 @@ PODS:
   - app_links (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - onesignal_flutter (3.4.2):
+    - Flutter
+    - OneSignalXCFramework (= 3.11.4)
+  - OneSignalXCFramework (3.11.4):
+    - OneSignalXCFramework/OneSignalCore (= 3.11.4)
+    - OneSignalXCFramework/OneSignalExtension (= 3.11.4)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.4)
+  - OneSignalXCFramework/OneSignalCore (3.11.4)
+  - OneSignalXCFramework/OneSignalExtension (3.11.4):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOutcomes (3.11.4):
+    - OneSignalXCFramework/OneSignalCore
   - path_provider_ios (0.0.1):
     - Flutter
   - pay_ios (0.0.1):
@@ -50,6 +63,8 @@ PODS:
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - Flutter (from `Flutter`)
+  - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
+  - OneSignalXCFramework (< 4.0, >= 3.4.3)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - stripe_ios (from `.symlinks/plugins/stripe_ios/ios`)
@@ -58,6 +73,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - OneSignalXCFramework
     - Stripe
     - StripeApplePay
     - StripeCore
@@ -72,6 +88,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/app_links/ios"
   Flutter:
     :path: Flutter
+  onesignal_flutter:
+    :path: ".symlinks/plugins/onesignal_flutter/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
   pay_ios:
@@ -86,6 +104,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   app_links: ab4ba54d10a13d45825336bc9707b5eadee81191
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  onesignal_flutter: bd3bc654bc632e7d6cc8d219a7caebf0592c63e5
+  OneSignalXCFramework: 45932e3c1e659e1485bfd765e0543d7f30cc737b
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
   pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   Stripe: ff389e265eeffb891b871b62b2fa644e30e69338
@@ -100,6 +120,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
-PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
+PODFILE CHECKSUM: 0d520eff7fceb6733c0076a09d72e275f08c0896
 
 COCOAPODS: 1.11.3
