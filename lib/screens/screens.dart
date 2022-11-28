@@ -103,36 +103,12 @@ class Example extends StatelessWidget {
         ],
       ),
     ]),
-    ExampleSection(
-      title: 'Payment Sheet',
-      expanded: true,
-      children: [
-        Example(
-          title: 'Single Step',
-          builder: (context) => const PaymentSheetScreen(),
-          platformsSupported: const [
-            DevicePlatform.android,
-            DevicePlatform.ios
-          ],
-        ),
-        Example(
-          title: 'Custom Flow',
-          builder: (context) => PaymentSheetScreenWithCustomFlow(),
-          platformsSupported: const [
-            DevicePlatform.android,
-            DevicePlatform.ios
-          ],
-        ),
-      ],
-    ),
-    Example(
-      title: 'Checkout',
-      builder: (c) => CheckoutScreenExample(),
-      platformsSupported: const [
-        DevicePlatform.android,
-        DevicePlatform.ios,
-        DevicePlatform.web
-      ],
-    ),
+    ExampleSection(title: 'Payment Sheet', expanded: true, children: [
+      Example(
+        title: 'Single Step',
+        builder: (context) => const PaymentSheetScreen(),
+        platformsSupported: const [DevicePlatform.android, DevicePlatform.ios],
+      ),
+    ])
   ];
 }
