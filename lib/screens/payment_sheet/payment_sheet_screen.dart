@@ -3,6 +3,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
 import 'package:app/widgets/example_scaffold.dart';
 import 'package:app/widgets/loading_button.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final client = Supabase.instance.client;
@@ -125,6 +126,12 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
     try {
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
+
+      final deviceState = await OneSignal.shared.getDeviceState();
+      final subscribed = deviceState?.subscribed;
+      if (subscribed == false) {
+        OneSignal.shared.addTrigger("prompt_notification", "true");
+      }
 
       setState(() {
         step = 0;

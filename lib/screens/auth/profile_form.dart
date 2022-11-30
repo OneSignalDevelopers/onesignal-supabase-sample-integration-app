@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../widgets/example_scaffold.dart';
@@ -89,6 +90,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         'username': username,
                         'website': website,
                       });
+
                       if (mounted) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
