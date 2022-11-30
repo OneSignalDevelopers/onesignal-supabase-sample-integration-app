@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginForm extends StatefulWidget {
@@ -72,10 +73,15 @@ class _LoginFormState extends State<LoginForm> {
                   try {
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    await Supabase.instance.client.auth.signUp(
+                    final authResponse =
+                        await Supabase.instance.client.auth.signUp(
                       email: email,
                       password: password,
                     );
+                    final id = authResponse.user?.id;
+                    if (id != null) {
+                      OneSignal.shared.setExternalUserId(id);
+                    }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(e.toString() ?? "Signup failed"),
