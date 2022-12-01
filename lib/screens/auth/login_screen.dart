@@ -48,10 +48,15 @@ class _LoginFormState extends State<LoginForm> {
                   try {
                     final email = _emailController.text;
                     final password = _passwordController.text;
-                    await Supabase.instance.client.auth.signInWithPassword(
+                    final authResponse =
+                        await Supabase.instance.client.auth.signInWithPassword(
                       email: email,
                       password: password,
                     );
+                    final id = authResponse.user?.id;
+                    if (id != null) {
+                      OneSignal.shared.setExternalUserId(id);
+                    }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(e.toString() ?? "Login failed"),
