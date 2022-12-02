@@ -48,3 +48,4 @@ app.*.map.json
 .vscode/settings.json
 .env
 local.properties
+*.p12
