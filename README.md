@@ -20,7 +20,7 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 
 ![App demo](readme_assets/push-notification-demo.gif)
 
-⚠️⚠️ Follow the integration guide to succesfully test the integration end-to-end. Ensure the [Supabase](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase) and [Next.js](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-api) projects are running first.
+⚠️⚠️ Follow the integration guide to succesfully test the integration end-to-end. The [Supabase](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase) and [Next.js](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-api) projects must be running first.
 
 ---
 
