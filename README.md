@@ -14,6 +14,8 @@
 
 OneSignal makes engaging customers simple and is the fastest, most reliable service to send push notifications, in-app messages, SMS, and emails.
 
+---
+
 # OneSignal + Supabase Sample Integration App
 
 This repo contains the companion app to the [Onesignal + Supabase Sample Integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
@@ -21,8 +23,6 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 ![App demo](readme_assets/push-notification-demo.gif)
 
 ⚠️⚠️ Follow the integration guide to succesfully test the integration end-to-end. The [Supabase](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase) and [Next.js](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-api) projects must be running first.
-
----
 
 ## 🚦 Getting Started
 
@@ -41,6 +41,8 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 * [OneSignal SDK + Flutter Integration Sample](https://github.com/OneSignalDevelopers/OneSignal-Flutter-Sample)
 * [OneSignal + Flutter Push Sample](https://github.com/OneSignalDevelopers/OneSignal-Flutter-Push-Sample)
 * [Flutter SDK Setup](https://documentation.onesignal.com/docs/flutter-sdk-setup)
+
+---
 
 # ❤️ Developer Community
 
