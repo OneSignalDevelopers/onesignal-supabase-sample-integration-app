@@ -14,7 +14,7 @@
 
 OneSignal makes engaging customers simple and is the fastest, most reliable service to send push notifications, in-app messages, SMS, and emails.
 
-# OneSignal + Supabase Sample Omni-channel Integration Companion App
+# OneSignal + Supabase Sample Integration App
 
 This repo contains the companion app to the [Onesignal + Supabase Sample Integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
 
