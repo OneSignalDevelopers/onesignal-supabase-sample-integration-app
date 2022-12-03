@@ -94,9 +94,13 @@ index ad08247..903def2 100644
 
 ## How it works
 
-The OneSignal external Id (EUID) is set upon user signup and login.
+### Setting External User ID
+
+The EUID is when the user signs up or logs in.
 
 https://github.com/OneSignalDevelopers/onesignal-supabase-sample-integration-app/blob/0277752c4e88d7e4b13bbb20af84a6700d9e141b/lib/screens/auth/login_screen.dart#L51-L59
+
+### Triggering an In-App Message
 
 Prompt user for notification consent upon completing purchase with an in-app message.
 
