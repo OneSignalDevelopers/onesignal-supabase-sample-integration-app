@@ -91,6 +91,17 @@ index ad08247..903def2 100644
 * [OneSignal + Flutter Push Sample](https://github.com/OneSignalDevelopers/OneSignal-Flutter-Push-Sample)
 * [Flutter SDK Setup](https://documentation.onesignal.com/docs/flutter-sdk-setup)
 
+
+## How it works
+
+The OneSignal external Id (EUID) is set upon user signup and login.
+
+https://github.com/OneSignalDevelopers/onesignal-supabase-sample-integration-app/blob/0277752c4e88d7e4b13bbb20af84a6700d9e141b/lib/screens/auth/login_screen.dart#L51-L59
+
+Prompt user for notification consent upon completing purchase with an in-app message.
+
+https://github.com/OneSignalDevelopers/onesignal-supabase-sample-integration-app/blob/0277752c4e88d7e4b13bbb20af84a6700d9e141b/lib/screens/payment_sheet/payment_sheet_screen.dart#L130-L134
+
 ---
 
 # ❤️ Developer Community
