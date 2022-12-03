@@ -27,10 +27,59 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 ## 🚦 Getting Started
 
 1. Run `cp .env.example .env.local` to duplicate the environment file template and set their values based on what you setup in the [integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
-2. Todo: Update bundle identifier
-3. Todo: Update app group
-4. todo: Update merchant identifier
-5. Run `flutter start` to launch the app on your device or emulator (iOS Simulator doesn't support push notifications).
+2. Update the app's bundle and group IDs with the identifier you setup in Apple Developer Network ![runner](/readme_assets/runner-capabilities.png) ![nse](/readme_assets/nse-capabilities.png)
+
+Your project diff should look similar to this 👇 after the changes.
+
+```diff
+diff --git a/ios/Runner.xcodeproj/project.pbxproj b/ios/Runner.xcodeproj/project.pbxproj
+index 2864eb6..62cf60e 100644
+--- a/ios/Runner.xcodeproj/project.pbxproj
++++ b/ios/Runner.xcodeproj/project.pbxproj
+@@ -494,7 +494,7 @@
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.onesignal.devrel.supabase-sample-integration";
++				PRODUCT_BUNDLE_IDENTIFIER = your.bundle.id;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+ 				SWIFT_VERSION = 5.0;
+@@ -738,7 +738,7 @@
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.onesignal.devrel.supabase-sample-integration";
++				PRODUCT_BUNDLE_IDENTIFIER = your.bundle.id;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+ 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+@@ -765,7 +765,7 @@
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+-				PRODUCT_BUNDLE_IDENTIFIER = "com.onesignal.devrel.supabase-sample-integration";
++				PRODUCT_BUNDLE_IDENTIFIER = your.bundle.id;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
+ 				SWIFT_VERSION = 5.0;
+diff --git a/ios/Runner/Runner.entitlements b/ios/Runner/Runner.entitlements
+index ad08247..903def2 100644
+--- a/ios/Runner/Runner.entitlements
++++ b/ios/Runner/Runner.entitlements
+@@ -4,9 +4,5 @@
+ <dict>
+ 	<key>aps-environment</key>
+ 	<string>development</string>
++	<key>com.apple.security.application-groups</key>
++	<array>
++		<string>group.your.app.group</string>
++	</array>
+ </dict>
+ </plist>
+```
+
+3. Run `flutter start` to launch the app on your device or emulator (iOS Simulator doesn't support push notifications).
 
 ## 👀 Looking For a Getting Started With Flutter Guide?
 
