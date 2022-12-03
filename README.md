@@ -27,7 +27,7 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 ## 🚦 Getting Started
 
 1. Run `cp .env.example .env.local` to duplicate the environment file template and set their values based on what you setup in the [integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
-2. Update the app's bundle and group IDs with the identifier you setup in Apple Developer Network ![runner](/readme_assets/runner-capabilities.png) ![nse](/readme_assets/nse-capabilities.png)
+2. If you're building for iOS, update the app's bundle and group IDs with the identifier you setup in Apple Developer Network ![runner](/readme_assets/runner-capabilities.png) ![nse](/readme_assets/nse-capabilities.png)
 
 Your project diff should look similar to this 👇 after the changes.
 
@@ -79,7 +79,7 @@ index ad08247..903def2 100644
  </plist>
 ```
 
-3. Run `flutter start` to launch the app on your device or emulator (iOS Simulator doesn't support push notifications).
+3. Run `flutter start` to launch the app on your iOS device or emulator (iOS Simulator doesn't support push notifications).
 
 ## 👀 Looking For a Getting Started With Flutter Guide?
 
