@@ -19,8 +19,6 @@ This repo contains the companion app to the [Onesignal + Supabase Sample Integra
 
 ![App demo](readme_assets/push-notification-demo.gif)
 
-⚠️⚠️ Follow the integration guide to succesfully test the integration end-to-end. The [Supabase](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase) and [Next.js](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-api) projects must be running first.
-
 ## 🚦 Getting Started
 
 1. Run `cp .env.example .env.local` to duplicate the environment file template and set their values based on what you setup in the [integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
