@@ -115,6 +115,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       setState(() {
                         _loading = true;
                       });
+                      final id = Supabase.instance.client.auth.currentUser!.id;
                       final email =
                           Supabase.instance.client.auth.currentUser!.email!;
 
@@ -125,6 +126,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         backgroundColor: Colors.red,
                       ));
                     }
+
                     setState(() {
                       _loading = false;
                     });

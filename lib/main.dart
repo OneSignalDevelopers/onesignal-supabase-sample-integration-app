@@ -7,11 +7,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-final a = (OSNotificationOpenedResult result) {
-  print("CALLED setNotificationOpenedHandler");
-  print(result);
-};
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -29,9 +24,6 @@ void main() async {
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
   OneSignal.shared.setAppId(onesignalAppId);
 
-  OneSignal.shared.setNotificationOpenedHandler(a);
-
-  print("App initialized XYZ!@#");
   runApp(const MyApp());
 }
 
