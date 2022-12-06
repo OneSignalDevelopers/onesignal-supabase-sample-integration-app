@@ -109,6 +109,28 @@ class _ProfileFormState extends State<ProfileForm> {
                   },
                   child: const Text('Save')),
               const SizedBox(height: 16),
+              ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      setState(() {
+                        _loading = true;
+                      });
+                      final email =
+                          Supabase.instance.client.auth.currentUser!.email!;
+
+                      await OneSignal.shared.setEmail(email: email);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Error setting email'),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                    setState(() {
+                      _loading = false;
+                    });
+                  },
+                  child: const Text('Enable Email')),
+              const SizedBox(height: 16),
               TextButton(
                   onPressed: () => Supabase.instance.client.auth.signOut(),
                   child: const Text('Sign Out')),
