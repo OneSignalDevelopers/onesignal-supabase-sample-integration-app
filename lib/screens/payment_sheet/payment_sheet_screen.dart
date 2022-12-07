@@ -21,8 +21,8 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: 'Payment Sheet',
-      tags: const ['Single Step'],
+      title: 'Stripe',
+      tags: const ['Payment Sheet'],
       children: [
         Stepper(
           controlsBuilder: emptyControlBuilder,
@@ -152,7 +152,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../widgets/example_scaffold.dart';
@@ -108,30 +107,6 @@ class _ProfileFormState extends State<ProfileForm> {
                     });
                   },
                   child: const Text('Save')),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      setState(() {
-                        _loading = true;
-                      });
-                      final id = Supabase.instance.client.auth.currentUser!.id;
-                      final email =
-                          Supabase.instance.client.auth.currentUser!.email!;
-
-                      await OneSignal.shared.setEmail(email: email);
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Error setting email'),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
-
-                    setState(() {
-                      _loading = false;
-                    });
-                  },
-                  child: const Text('Enable Email')),
               const SizedBox(height: 16),
               TextButton(
                   onPressed: () => Supabase.instance.client.auth.signOut(),
