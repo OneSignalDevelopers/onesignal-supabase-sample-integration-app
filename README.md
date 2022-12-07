@@ -17,7 +17,7 @@ OneSignal makes engaging customers simple and is the fastest, most reliable serv
 
 This repo contains the companion app to the [Onesignal + Supabase Sample Integration guide](https://github.com/onesignaldevelopers/onesignal-supabase-sample-integration-supabase).
 
-<img src="readme_assets/push-notification-demo.gif" height="960px"/>
+<p align="center"><img src="readme_assets/push-notification-demo.gif" height="960px"/></p>
 
 ## 🚦 Getting Started
 
