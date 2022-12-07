@@ -1,10 +1,9 @@
-import 'package:app/screens/auth/auth_screen.dart';
-import 'package:app/screens/auth/login_screen.dart';
 import 'package:app/screens/auth/profile_form.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen.dart';
 import 'package:app/widgets/platform_icons.dart';
 
+import 'auth/onesignal_form.dart';
 import 'themes.dart';
 
 class ExampleSection extends StatelessWidget {
@@ -58,9 +57,8 @@ class Example extends StatelessWidget {
       },
       title: Text(title, style: style),
       leading: leading,
-      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-        PlatformIcons(supported: platformsSupported),
-        const Icon(Icons.chevron_right_rounded),
+      trailing: Row(mainAxisSize: MainAxisSize.min, children: const [
+        Icon(Icons.chevron_right_rounded),
       ]),
     );
   }
@@ -68,22 +66,20 @@ class Example extends StatelessWidget {
   static List<Example> paymentMethodScreens = [];
 
   static List<Widget> screens = [
-    ExampleSection(title: 'Auth', children: [
+    ExampleSection(title: 'Profile', children: [
       Example(
-        title: 'Profile',
+        title: 'Supabase',
         builder: (c) => const ProfileForm(),
-        platformsSupported: const [
-          DevicePlatform.android,
-          DevicePlatform.ios,
-          DevicePlatform.web
-        ],
+      ),
+      Example(
+        title: 'OneSignal',
+        builder: (c) => const OnesignalForm(),
       ),
     ]),
-    ExampleSection(title: 'Payment Sheet', expanded: true, children: [
+    ExampleSection(title: 'Stripe', expanded: true, children: [
       Example(
-        title: 'Single Step',
+        title: 'Payment Sheet',
         builder: (context) => const PaymentSheetScreen(),
-        platformsSupported: const [DevicePlatform.android, DevicePlatform.ios],
       ),
     ])
   ];
