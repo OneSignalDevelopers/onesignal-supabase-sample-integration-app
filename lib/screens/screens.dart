@@ -66,7 +66,7 @@ class Example extends StatelessWidget {
   static List<Example> paymentMethodScreens = [];
 
   static List<Widget> screens = [
-    ExampleSection(title: 'Profile', children: [
+    ExampleSection(title: 'Setup', expanded: true, children: [
       Example(
         title: 'Supabase',
         builder: (c) => const ProfileForm(),
@@ -76,11 +76,23 @@ class Example extends StatelessWidget {
         builder: (c) => const OnesignalForm(),
       ),
     ]),
-    ExampleSection(title: 'Stripe', expanded: true, children: [
+    ExampleSection(title: 'Push', expanded: true, children: [
       Example(
-        title: 'Payment Sheet',
+        title: 'Stripe order confirmation',
         builder: (context) => const PaymentSheetScreen(),
       ),
-    ])
+    ]),
+    ExampleSection(title: 'Email', expanded: true, children: [
+      Example(
+        title: 'Stripe order confirmation',
+        builder: (context) => const PaymentSheetScreen(),
+      ),
+    ]),
+    ExampleSection(title: 'In-app Message', expanded: true, children: [
+      Example(
+        title: 'Ask for consent for Notifications',
+        builder: (context) => const PaymentSheetScreen(),
+      ),
+    ]),
   ];
 }

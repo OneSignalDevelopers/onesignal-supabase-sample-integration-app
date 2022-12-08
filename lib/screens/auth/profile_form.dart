@@ -56,62 +56,67 @@ class _ProfileFormState extends State<ProfileForm> {
   Widget build(BuildContext context) {
     return _loading
         ? const Center(child: CircularProgressIndicator())
-        : Material(
-            child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            children: [
-              TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  label: Text('Username'),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _websiteController,
-                decoration: const InputDecoration(
-                  label: Text('Website'),
-                ),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      setState(() {
-                        _loading = true;
-                      });
-                      final userId =
-                          Supabase.instance.client.auth.currentUser!.id;
-                      final username = _usernameController.text;
-                      final website = _websiteController.text;
-                      await Supabase.instance.client.from('profiles').upsert({
-                        'id': userId,
-                        'username': username,
-                        'website': website,
-                      });
+        : ExampleScaffold(title: 'Supabase Auth', children: [
+            ListView(
+                shrinkWrap: true,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                children: [
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(
+                      label: Text('Username'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _websiteController,
+                    decoration: const InputDecoration(
+                      label: Text('Website'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          setState(() {
+                            _loading = true;
+                          });
+                          final userId =
+                              Supabase.instance.client.auth.currentUser!.id;
+                          final username = _usernameController.text;
+                          final website = _websiteController.text;
+                          await Supabase.instance.client
+                              .from('profiles')
+                              .upsert({
+                            'id': userId,
+                            'username': username,
+                            'website': website,
+                          });
 
-                      if (mounted) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text('Saved profile'),
-                        ));
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Error saving profile'),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
-                    setState(() {
-                      _loading = false;
-                    });
-                  },
-                  child: const Text('Save')),
-              const SizedBox(height: 16),
-              TextButton(
-                  onPressed: () => Supabase.instance.client.auth.signOut(),
-                  child: const Text('Sign Out')),
-            ],
-          ));
+                          if (mounted) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Saved profile'),
+                            ));
+                          }
+                        } catch (e) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Error saving profile'),
+                            backgroundColor: Colors.red,
+                          ));
+                        }
+                        setState(() {
+                          _loading = false;
+                        });
+                      },
+                      child: const Text('Save')),
+                  const SizedBox(height: 16),
+                  TextButton(
+                      onPressed: () => Supabase.instance.client.auth.signOut(),
+                      child: const Text('Sign Out')),
+                ])
+          ]);
   }
 }

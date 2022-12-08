@@ -15,6 +15,7 @@ class _OnesignalFormState extends State<OnesignalForm> {
   var _loading = true;
   final _usernameController = TextEditingController();
   final _websiteController = TextEditingController();
+  OSDeviceState? _onesignalDeviceState;
 
   @override
   void initState() {
@@ -30,7 +31,13 @@ class _OnesignalFormState extends State<OnesignalForm> {
   }
 
   Future<void> _loadDevice() async {
-    try {} catch (e) {
+    try {
+      final state = await OneSignal.shared.getDeviceState();
+
+      setState(() {
+        _onesignalDeviceState = state;
+      });
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Error loading OneSignal device details.'),
         backgroundColor: Colors.red,
@@ -43,28 +50,97 @@ class _OnesignalFormState extends State<OnesignalForm> {
 
   @override
   Widget build(BuildContext context) {
+    final emailActionDesc =
+        _onesignalDeviceState!.emailSubscribed ? "Disable" : "Enable";
+    final pushActionDesc =
+        _onesignalDeviceState!.subscribed ? "Disable" : "Enable";
+
     return _loading
         ? const Center(child: CircularProgressIndicator())
-        : ExampleScaffold(title: 'OneSignal', children: [
+        : ExampleScaffold(title: 'OneSignal Messaging', children: [
             ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               children: [
                 ElevatedButton(
-                    onPressed: setEmail, child: const Text('Enable Email')),
+                    onPressed: _onesignalDeviceState!.emailSubscribed
+                        ? unsubscribeEmail
+                        : subscribeEmail,
+                    child: Text('$emailActionDesc Email')),
                 ElevatedButton(
-                    onPressed: getDeviceState,
-                    child: const Text('Load Device State'))
+                    onPressed: _onesignalDeviceState!.subscribed
+                        ? unsubscribePush
+                        : subscribePush,
+                    child: Text('$pushActionDesc Push')),
+                const SizedBox(height: 16),
+                const SizedBox(height: 16),
+                Text(
+                    'Subscribed to Push: ${_onesignalDeviceState?.subscribed}'),
+                Text(
+                    'Device ID (Push Channel): ${_onesignalDeviceState?.userId}'),
+                Text(
+                    'Push Enabled on Device: ${_onesignalDeviceState?.hasNotificationPermission}'),
+                const SizedBox(height: 16),
+                Text(
+                    'Subscribed to Email: ${_onesignalDeviceState?.emailSubscribed}'),
+                Text(
+                    'Device ID (Email Channel): ${_onesignalDeviceState?.emailUserId}'),
+                Text('Email Address: ${_onesignalDeviceState?.emailAddress}'),
+                const SizedBox(height: 16),
+                Text(
+                    'Subscribed to SMS: ${_onesignalDeviceState?.smsSubscribed}'),
+                Text(
+                    'Device ID (SMS Channel): ${_onesignalDeviceState?.smsUserId}'),
+                Text('SMS Number: ${_onesignalDeviceState?.smsNumber}')
               ],
             )
           ]);
   }
 
-  Future<void> setEmail() async {
+  Future<void> subscribePush() async {
+    setState(() {
+      _loading = true;
+    });
+
     try {
-      setState(() {
-        _loading = true;
-      });
+      await OneSignal.shared.disablePush(false);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Error setting email'),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
+  Future<void> unsubscribePush() async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      await OneSignal.shared.disablePush(true);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Error setting email'),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
+  Future<void> subscribeEmail() async {
+    setState(() {
+      _loading = true;
+    });
+
+    try {
       final email = Supabase.instance.client.auth.currentUser!.email!;
       await OneSignal.shared.setEmail(email: email);
     } catch (e) {
@@ -79,14 +155,14 @@ class _OnesignalFormState extends State<OnesignalForm> {
     });
   }
 
-  Future<void> getDeviceState() async {
-    try {
-      setState(() {
-        _loading = true;
-      });
+  Future<void> unsubscribeEmail() async {
+    setState(() {
+      _loading = true;
+    });
 
-      final state = await OneSignal.shared.getDeviceState();
-      print(state);
+    try {
+      await OneSignal.shared.logoutEmail();
+      await _loadDevice();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Error setting email'),
