@@ -1,10 +1,10 @@
-import 'package:app/screens/auth/profile_form.dart';
+import 'package:app/screens/auth/supabase_profile_form.dart';
+import 'package:app/screens/in_app/notification_consent_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen.dart';
 import 'package:app/widgets/platform_icons.dart';
 
 import 'auth/onesignal_form.dart';
-import 'themes.dart';
 
 class ExampleSection extends StatelessWidget {
   final String title;
@@ -69,29 +69,29 @@ class Example extends StatelessWidget {
     ExampleSection(title: 'Setup', expanded: true, children: [
       Example(
         title: 'Supabase',
-        builder: (c) => const ProfileForm(),
+        builder: (c) => const SupabaseProfileForm(),
       ),
       Example(
         title: 'OneSignal',
         builder: (c) => const OnesignalForm(),
       ),
     ]),
-    ExampleSection(title: 'Push', expanded: true, children: [
+    ExampleSection(title: 'Push', children: [
       Example(
-        title: 'Stripe order confirmation',
+        title: 'Order confirmation',
         builder: (context) => const PaymentSheetScreen(),
       ),
     ]),
-    ExampleSection(title: 'Email', expanded: true, children: [
+    ExampleSection(title: 'Email', children: [
       Example(
-        title: 'Stripe order confirmation',
+        title: 'Order confirmation',
         builder: (context) => const PaymentSheetScreen(),
       ),
     ]),
-    ExampleSection(title: 'In-app Message', expanded: true, children: [
+    ExampleSection(title: 'In-app Message', children: [
       Example(
-        title: 'Ask for consent for Notifications',
-        builder: (context) => const PaymentSheetScreen(),
+        title: 'Ask for notification consent',
+        builder: (context) => const NotificationConsentScreen(),
       ),
     ]),
   ];

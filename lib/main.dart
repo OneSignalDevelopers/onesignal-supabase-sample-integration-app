@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: _user == null
             ? const LoginForm()
-            : ListView(children: [
+            : ListView(shrinkWrap: true, children: [
                 ...ListTile.divideTiles(
                     context: context,
                     tiles: [for (final example in Example.screens) example])

@@ -3,21 +3,22 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../widgets/example_scaffold.dart';
 
-class ProfileForm extends StatefulWidget {
-  const ProfileForm({Key? key}) : super(key: key);
+class SupabaseProfileForm extends StatefulWidget {
+  const SupabaseProfileForm({Key? key}) : super(key: key);
 
   @override
-  State<ProfileForm> createState() => _ProfileFormState();
+  State<SupabaseProfileForm> createState() => _SupabaseProfileFormState();
 }
 
-class _ProfileFormState extends State<ProfileForm> {
-  var _loading = true;
+class _SupabaseProfileFormState extends State<SupabaseProfileForm> {
+  var _loading = false;
   final _usernameController = TextEditingController();
   final _websiteController = TextEditingController();
 
   @override
   void initState() {
     _loadProfile();
+
     super.initState();
   }
 
@@ -25,31 +26,8 @@ class _ProfileFormState extends State<ProfileForm> {
   void dispose() {
     _usernameController.dispose();
     _websiteController.dispose();
-    super.dispose();
-  }
 
-  Future<void> _loadProfile() async {
-    try {
-      final userId = Supabase.instance.client.auth.currentUser!.id;
-      final data = (await Supabase.instance.client
-          .from('profiles')
-          .select()
-          .match({'id': userId}).maybeSingle()) as Map?;
-      if (data != null) {
-        setState(() {
-          _usernameController.text = data['username'];
-          _websiteController.text = data['website'];
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Error occured while getting profile'),
-        backgroundColor: Colors.red,
-      ));
-    }
-    setState(() {
-      _loading = false;
-    });
+    super.dispose();
   }
 
   @override
@@ -84,6 +62,8 @@ class _ProfileFormState extends State<ProfileForm> {
                           });
                           final userId =
                               Supabase.instance.client.auth.currentUser!.id;
+                          final email =
+                              Supabase.instance.client.auth.currentUser!.email;
                           final username = _usernameController.text;
                           final website = _websiteController.text;
                           await Supabase.instance.client
@@ -92,6 +72,7 @@ class _ProfileFormState extends State<ProfileForm> {
                             'id': userId,
                             'username': username,
                             'website': website,
+                            'email': email
                           });
 
                           if (mounted) {
@@ -101,6 +82,7 @@ class _ProfileFormState extends State<ProfileForm> {
                             ));
                           }
                         } catch (e) {
+                          print(e);
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text('Error saving profile'),
@@ -118,5 +100,36 @@ class _ProfileFormState extends State<ProfileForm> {
                       child: const Text('Sign Out')),
                 ])
           ]);
+  }
+
+  Future<void> _loadProfile() async {
+    setState(() {
+      _loading = false;
+    });
+
+    try {
+      final userId = Supabase.instance.client.auth.currentUser!.id;
+      final data = await Supabase.instance.client
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .maybeSingle();
+
+      if (data != null) {
+        setState(() {
+          _usernameController.text = data['username'] ?? '';
+          _websiteController.text = data['website'] ?? '';
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Error occurred while getting profile'),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+    setState(() {
+      _loading = false;
+    });
   }
 }

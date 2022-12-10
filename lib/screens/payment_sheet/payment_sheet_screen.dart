@@ -127,12 +127,6 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
 
-      final deviceState = await OneSignal.shared.getDeviceState();
-      final subscribed = deviceState?.subscribed;
-      if (subscribed == false) {
-        OneSignal.shared.addTrigger("prompt_notification", "true");
-      }
-
       setState(() {
         step = 0;
       });
