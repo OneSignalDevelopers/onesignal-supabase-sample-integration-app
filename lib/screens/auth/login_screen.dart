@@ -60,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
                     }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.toString() ?? "Login failed"),
+                      content: Text(e.toString()),
                       backgroundColor: Colors.red,
                     ));
                     setState(() {
@@ -89,8 +89,10 @@ class _LoginFormState extends State<LoginForm> {
                       await OneSignal.shared.setExternalUserId(id);
                     }
                   } catch (e) {
+                    print(e);
+
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.toString() ?? "Signup failed"),
+                      content: Text(e.toString()),
                       backgroundColor: Colors.red,
                     ));
                     setState(() {

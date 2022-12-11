@@ -69,7 +69,6 @@ class _OnesignalFormState extends State<OnesignalForm> {
                     title: const Text('Email'),
                     value: _onesignalDeviceState?.emailSubscribed ?? false,
                     onChanged: _onEmailSwitchChanged),
-
                 SwitchListTile(
                   title: const Text('SMS'),
                   value: false,
@@ -113,26 +112,6 @@ class _OnesignalFormState extends State<OnesignalForm> {
                     )
                   ],
                 ),
-                // const SizedBox(height: 16),
-                // const SizedBox(height: 16),
-                // Text(
-                //     'Subscribed to Push: ${_onesignalDeviceState?.subscribed}'),
-                // Text(
-                //     'Device ID (Push Channel): ${_onesignalDeviceState?.userId}'),
-                // Text(
-                //     'Push Enabled on Device: ${_onesignalDeviceState?.hasNotificationPermission}'),
-                // const SizedBox(height: 16),
-                // Text(
-                //     'Subscribed to Email: ${_onesignalDeviceState?.emailSubscribed}'),
-                // Text(
-                //     'Device ID (Email Channel): ${_onesignalDeviceState?.emailUserId}'),
-                // Text('Email Address: ${_onesignalDeviceState?.emailAddress}'),
-                // const SizedBox(height: 16),
-                // Text(
-                //     'Subscribed to SMS: ${_onesignalDeviceState?.smsSubscribed}'),
-                // Text(
-                //     'Device ID (SMS Channel): ${_onesignalDeviceState?.smsUserId}'),
-                // Text('SMS Number: ${_onesignalDeviceState?.smsNumber}')
               ],
             )
           ]);

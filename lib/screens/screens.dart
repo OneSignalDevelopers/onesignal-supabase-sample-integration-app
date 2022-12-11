@@ -76,22 +76,14 @@ class Example extends StatelessWidget {
         builder: (c) => const OnesignalForm(),
       ),
     ]),
-    ExampleSection(title: 'Push', children: [
+    ExampleSection(title: 'Use-cases', children: [
       Example(
-        title: 'Order confirmation',
-        builder: (context) => const PaymentSheetScreen(),
-      ),
-    ]),
-    ExampleSection(title: 'Email', children: [
-      Example(
-        title: 'Order confirmation',
-        builder: (context) => const PaymentSheetScreen(),
-      ),
-    ]),
-    ExampleSection(title: 'In-app Message', children: [
-      Example(
-        title: 'Ask for notification consent',
+        title: 'Prompt for notification consent',
         builder: (context) => const NotificationConsentScreen(),
+      ),
+      Example(
+        title: 'Order confirmation',
+        builder: (context) => const PaymentSheetScreen(),
       ),
     ]),
   ];

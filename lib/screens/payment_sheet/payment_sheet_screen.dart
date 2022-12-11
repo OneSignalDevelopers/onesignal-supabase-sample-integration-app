@@ -3,7 +3,6 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
 import 'package:app/widgets/example_scaffold.dart';
 import 'package:app/widgets/loading_button.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final client = Supabase.instance.client;
@@ -54,7 +53,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       final FunctionResponse functionRes =
           await client.functions.invoke('payment-sheet');
 
-      // 1. create some billingdetails
+      // 1. create some billing details
       const billingDetails = BillingDetails(
         name: 'Flutter Stripe',
         email: 'email@stripe.com',
@@ -133,7 +132,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Payment succesfully completed'),
+          content: Text('Payment successfully completed'),
         ),
       );
     } on Exception catch (e) {
