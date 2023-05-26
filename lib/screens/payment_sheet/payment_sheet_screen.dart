@@ -3,7 +3,6 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
 import 'package:app/widgets/example_scaffold.dart';
 import 'package:app/widgets/loading_button.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final client = Supabase.instance.client;
@@ -21,8 +20,8 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
-      title: 'Payment Sheet',
-      tags: const ['Single Step'],
+      title: 'Stripe',
+      tags: const ['Payment Sheet'],
       children: [
         Stepper(
           controlsBuilder: emptyControlBuilder,
@@ -54,7 +53,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       final FunctionResponse functionRes =
           await client.functions.invoke('payment-sheet');
 
-      // 1. create some billingdetails
+      // 1. create some billing details
       const billingDetails = BillingDetails(
         name: 'Flutter Stripe',
         email: 'email@stripe.com',
@@ -127,19 +126,13 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
 
-      final deviceState = await OneSignal.shared.getDeviceState();
-      final subscribed = deviceState?.subscribed;
-      if (subscribed == false) {
-        OneSignal.shared.addTrigger("prompt_notification", "true");
-      }
-
       setState(() {
         step = 0;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Payment succesfully completed'),
+          content: Text('Payment successfully completed'),
         ),
       );
     } on Exception catch (e) {
@@ -152,7 +145,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }

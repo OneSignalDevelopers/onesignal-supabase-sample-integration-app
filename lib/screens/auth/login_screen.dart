@@ -26,6 +26,7 @@ class _LoginFormState extends State<LoginForm> {
     return _loading
         ? const Center(child: CircularProgressIndicator())
         : ListView(
+            shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             children: [
               TextFormField(
@@ -55,11 +56,11 @@ class _LoginFormState extends State<LoginForm> {
                     );
                     final id = authResponse.user?.id;
                     if (id != null) {
-                      OneSignal.shared.setExternalUserId(id);
+                      await OneSignal.shared.setExternalUserId(id);
                     }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.toString() ?? "Login failed"),
+                      content: Text(e.toString()),
                       backgroundColor: Colors.red,
                     ));
                     setState(() {
@@ -85,11 +86,13 @@ class _LoginFormState extends State<LoginForm> {
                     );
                     final id = authResponse.user?.id;
                     if (id != null) {
-                      OneSignal.shared.setExternalUserId(id);
+                      await OneSignal.shared.setExternalUserId(id);
                     }
                   } catch (e) {
+                    print(e);
+
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(e.toString() ?? "Signup failed"),
+                      content: Text(e.toString()),
                       backgroundColor: Colors.red,
                     ));
                     setState(() {

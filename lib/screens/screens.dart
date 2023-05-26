@@ -1,35 +1,10 @@
-import 'package:app/screens/auth/auth_screen.dart';
-import 'package:app/screens/auth/login_screen.dart';
-import 'package:app/screens/auth/profile_form.dart';
+import 'package:app/screens/auth/supabase_profile_form.dart';
+import 'package:app/screens/in_app/notification_consent_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:app/screens/checkout/checkout_screen.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen.dart';
-import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
-import 'package:app/screens/regional_payment_methods/ali_pay_screen.dart';
-import 'package:app/screens/regional_payment_methods/aubecs_debit.dart';
-import 'package:app/screens/regional_payment_methods/fpx_screen.dart';
-import 'package:app/screens/regional_payment_methods/ideal_screen.dart';
-import 'package:app/screens/regional_payment_methods/klarna_screen.dart';
-import 'package:app/screens/regional_payment_methods/paypal_screen.dart';
-import 'package:app/screens/regional_payment_methods/us_bank_account.dart';
-import 'package:app/screens/wallets/apple_pay_screen.dart';
-import 'package:app/screens/wallets/apple_pay_screen_plugin.dart';
-import 'package:app/screens/wallets/google_pay_screen.dart';
-import 'package:app/screens/wallets/google_pay_stripe_screen.dart';
-import 'package:app/screens/wallets/open_apple_pay_setup_screen.dart';
 import 'package:app/widgets/platform_icons.dart';
 
-import 'card_payments/custom_card_payment_screen.dart';
-import 'card_payments/no_webhook_payment_cardform_screen.dart';
-import 'card_payments/no_webhook_payment_screen.dart';
-import 'card_payments/webhook_payment_screen.dart';
-import 'financial_connections.dart/financial_connections_session_screen.dart';
-import 'others/cvc_re_collection_screen.dart';
-import 'others/legacy_token_bank_screen.dart';
-import 'others/legacy_token_card_screen.dart';
-import 'others/setup_future_payment_screen.dart';
-import 'regional_payment_methods/grab_pay_screen.dart';
-import 'themes.dart';
+import 'auth/onesignal_form.dart';
 
 class ExampleSection extends StatelessWidget {
   final String title;
@@ -82,9 +57,8 @@ class Example extends StatelessWidget {
       },
       title: Text(title, style: style),
       leading: leading,
-      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-        PlatformIcons(supported: platformsSupported),
-        const Icon(Icons.chevron_right_rounded),
+      trailing: Row(mainAxisSize: MainAxisSize.min, children: const [
+        Icon(Icons.chevron_right_rounded),
       ]),
     );
   }
@@ -92,23 +66,25 @@ class Example extends StatelessWidget {
   static List<Example> paymentMethodScreens = [];
 
   static List<Widget> screens = [
-    ExampleSection(title: 'Auth', children: [
+    ExampleSection(title: 'Setup', expanded: true, children: [
       Example(
-        title: 'Profile',
-        builder: (c) => const ProfileForm(),
-        platformsSupported: const [
-          DevicePlatform.android,
-          DevicePlatform.ios,
-          DevicePlatform.web
-        ],
+        title: 'Supabase',
+        builder: (c) => const SupabaseProfileForm(),
+      ),
+      Example(
+        title: 'OneSignal',
+        builder: (c) => const OnesignalForm(),
       ),
     ]),
-    ExampleSection(title: 'Payment Sheet', expanded: true, children: [
+    ExampleSection(title: 'Use-cases', children: [
       Example(
-        title: 'Single Step',
-        builder: (context) => const PaymentSheetScreen(),
-        platformsSupported: const [DevicePlatform.android, DevicePlatform.ios],
+        title: 'Prompt for notification consent',
+        builder: (context) => const NotificationConsentScreen(),
       ),
-    ])
+      Example(
+        title: 'Order confirmation',
+        builder: (context) => const PaymentSheetScreen(),
+      ),
+    ]),
   ];
 }
