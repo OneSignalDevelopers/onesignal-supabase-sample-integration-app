@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:app/config.dart';
 import 'package:app/widgets/example_scaffold.dart';
-import '../../config.dart';
 import 'platforms/stripe_checkout.dart'
     if (dart.library.js) 'platforms/stripe_checkout_web.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +11,7 @@ import 'package:stripe_checkout/stripe_checkout.dart';
 import 'package:http/http.dart' as http;
 
 class CheckoutScreenExample extends StatefulWidget {
-  CheckoutScreenExample({
+  const CheckoutScreenExample({
     Key? key,
   }) : super(key: key);
 
@@ -25,13 +24,13 @@ class _CheckoutScreenExample extends State<CheckoutScreenExample> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Checkout Page',
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       children: [
-        SizedBox(height: 120),
+        const SizedBox(height: 120),
         Center(
           child: ElevatedButton(
             onPressed: getCheckout,
-            child: Text('Open Checkout'),
+            child: const Text('Open Checkout'),
           ),
         )
       ],

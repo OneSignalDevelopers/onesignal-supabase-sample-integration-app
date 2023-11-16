@@ -9,6 +9,8 @@ import 'package:app/widgets/loading_button.dart';
 import '../../config.dart';
 
 class UsBankAccountScreen extends StatefulWidget {
+  const UsBankAccountScreen({super.key});
+
   @override
   _UsBankAccountScreenState createState() => _UsBankAccountScreenState();
 }
@@ -35,26 +37,26 @@ class _UsBankAccountScreenState extends State<UsBankAccountScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'ACH payment Us bank account',
-      tags: ['Payments'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Payments'],
+      padding: const EdgeInsets.all(16),
       children: [
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Routing number',
           ),
           controller: _routingNumberController,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Account number',
           ),
           controller: _accountController,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         LoadingButton(
           onPressed: _handlePayPress,
           text: 'Pay',
@@ -66,7 +68,7 @@ class _UsBankAccountScreenState extends State<UsBankAccountScreen> {
   Future<void> _handlePayPress() async {
     try {
       // 1. Gather customer billing information (ex. email)
-      final billingDetails = BillingDetails(
+      const billingDetails = BillingDetails(
         name: 'Flutter Stipe',
         email: 'email@stripe.com',
         phone: '+48888000888',
@@ -204,7 +206,7 @@ class _VerifyMicroDepositsDialogState
           ));
 
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Account verified successfully')));
+          const SnackBar(content: Text('Account verified successfully')));
     } on Exception catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: $e')));
@@ -219,36 +221,36 @@ class _VerifyMicroDepositsDialogState
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text('Enter the details of the micro deposits verification'),
-            SizedBox(height: 10),
+            const Text('Enter the details of the micro deposits verification'),
+            const SizedBox(height: 10),
             TextField(
               controller: _descriptorController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Descriptor',
               ),
             ),
-            SizedBox(height: 10),
-            Text('As alternative enter the microdeposits'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+            const Text('As alternative enter the microdeposits'),
+            const SizedBox(height: 10),
             TextField(
               keyboardType: TextInputType.number,
               controller: _amount1Controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Microdeposit 1 value',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _amount2Controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Microdeposit 1 value',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             LoadingButton(
               onPressed: () async {
                 await verifyIntentWithMicroDeposit();

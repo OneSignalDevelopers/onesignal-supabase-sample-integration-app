@@ -38,7 +38,7 @@ class GrabPayScreen extends StatelessWidget {
     final clientSecret = await result['clientSecret'];
 
     // 2. create some billingdetails
-    final billingDetails = BillingDetails(
+    const billingDetails = BillingDetails(
       email: 'email@stripe.com',
       phone: '+60123456789',
       address: Address(
@@ -55,7 +55,7 @@ class GrabPayScreen extends StatelessWidget {
     try {
       await Stripe.instance.confirmPayment(
         paymentIntentClientSecret: clientSecret,
-        data: PaymentMethodParams.grabPay(
+        data: const PaymentMethodParams.grabPay(
           paymentMethodData: PaymentMethodData(
             billingDetails: billingDetails,
           ),
@@ -63,7 +63,7 @@ class GrabPayScreen extends StatelessWidget {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Payment succesfully completed'),
         ),
       );
@@ -77,7 +77,7 @@ class GrabPayScreen extends StatelessWidget {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }
@@ -88,8 +88,8 @@ class GrabPayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'GrabPay',
-      tags: ['Payment method'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Payment method'],
+      padding: const EdgeInsets.all(16),
       children: [
         LoadingButton(
           onPressed: () async {

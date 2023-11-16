@@ -18,15 +18,15 @@ class _OpenApplePaySetupState extends State<OpenApplePaySetup> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Open Apple pay Setup',
-      tags: ['iOS'],
-      padding: EdgeInsets.all(16),
+      tags: const ['iOS'],
+      padding: const EdgeInsets.all(16),
       children: [
         Center(
           child: ElevatedButton(
               onPressed: () {
                 openApplePaySetup();
               },
-              child: Text('Open apple pay setup')),
+              child: const Text('Open apple pay setup')),
         )
       ],
     );

@@ -16,6 +16,8 @@ const _paymentItems = [
 ];
 
 class ApplePayExternalPluginScreen extends StatefulWidget {
+  const ApplePayExternalPluginScreen({super.key});
+
   @override
   _ApplePayExternalPluginScreenState createState() =>
       _ApplePayExternalPluginScreenState();
@@ -41,8 +43,8 @@ class _ApplePayExternalPluginScreenState
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Apple Pay',
-      padding: EdgeInsets.all(16),
-      tags: ['iOS', 'Pay plugin'],
+      padding: const EdgeInsets.all(16),
+      tags: const ['iOS', 'Pay plugin'],
       children: [
         pay.ApplePayButton(
           paymentConfigurationAsset: 'apple_pay_payment_profile.json',
@@ -52,7 +54,7 @@ class _ApplePayExternalPluginScreenState
           loadingIndicator: const Center(
             child: CircularProgressIndicator(),
           ),
-          childOnError: Text('Apple Pay is not available in this device'),
+          childOnError: const Text('Apple Pay is not available in this device'),
           onError: (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

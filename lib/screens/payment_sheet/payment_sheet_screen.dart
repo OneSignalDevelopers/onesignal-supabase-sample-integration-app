@@ -127,10 +127,9 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       // 3. display the payment sheet.
       await Stripe.instance.presentPaymentSheet();
 
-      final deviceState = await OneSignal.shared.getDeviceState();
-      final subscribed = deviceState?.subscribed;
-      if (subscribed == false) {
-        OneSignal.shared.addTrigger("prompt_notification", "true");
+      final isSubscribed = OneSignal.User.pushSubscription.optedIn;
+      if (isSubscribed == null || !isSubscribed) {
+        OneSignal.InAppMessages.addTrigger("prompt_notification", "true");
       }
 
       setState(() {
@@ -152,7 +151,7 @@ class _PaymentSheetScreenState extends State<PaymentSheetScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }

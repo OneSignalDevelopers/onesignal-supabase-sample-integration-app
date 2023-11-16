@@ -1,35 +1,8 @@
-import 'package:app/screens/auth/auth_screen.dart';
-import 'package:app/screens/auth/login_screen.dart';
 import 'package:app/screens/auth/profile_form.dart';
 import 'package:flutter/material.dart';
-import 'package:app/screens/checkout/checkout_screen.dart';
 import 'package:app/screens/payment_sheet/payment_sheet_screen.dart';
-import 'package:app/screens/payment_sheet/payment_sheet_screen_custom_flow.dart';
-import 'package:app/screens/regional_payment_methods/ali_pay_screen.dart';
-import 'package:app/screens/regional_payment_methods/aubecs_debit.dart';
-import 'package:app/screens/regional_payment_methods/fpx_screen.dart';
-import 'package:app/screens/regional_payment_methods/ideal_screen.dart';
-import 'package:app/screens/regional_payment_methods/klarna_screen.dart';
-import 'package:app/screens/regional_payment_methods/paypal_screen.dart';
-import 'package:app/screens/regional_payment_methods/us_bank_account.dart';
-import 'package:app/screens/wallets/apple_pay_screen.dart';
-import 'package:app/screens/wallets/apple_pay_screen_plugin.dart';
-import 'package:app/screens/wallets/google_pay_screen.dart';
-import 'package:app/screens/wallets/google_pay_stripe_screen.dart';
-import 'package:app/screens/wallets/open_apple_pay_setup_screen.dart';
 import 'package:app/widgets/platform_icons.dart';
 
-import 'card_payments/custom_card_payment_screen.dart';
-import 'card_payments/no_webhook_payment_cardform_screen.dart';
-import 'card_payments/no_webhook_payment_screen.dart';
-import 'card_payments/webhook_payment_screen.dart';
-import 'financial_connections.dart/financial_connections_session_screen.dart';
-import 'others/cvc_re_collection_screen.dart';
-import 'others/legacy_token_bank_screen.dart';
-import 'others/legacy_token_card_screen.dart';
-import 'others/setup_future_payment_screen.dart';
-import 'regional_payment_methods/grab_pay_screen.dart';
-import 'themes.dart';
 
 class ExampleSection extends StatelessWidget {
   final String title;

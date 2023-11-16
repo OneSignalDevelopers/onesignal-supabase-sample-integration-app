@@ -21,8 +21,8 @@ void main() async {
   await Stripe.instance.applySettings();
 
   //Remove this method to stop OneSignal Debugging
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-  OneSignal.shared.setAppId(onesignalAppId);
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize(onesignalAppId);
 
   runApp(const MyApp());
 }

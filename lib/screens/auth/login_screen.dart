@@ -55,7 +55,7 @@ class _LoginFormState extends State<LoginForm> {
                     );
                     final id = authResponse.user?.id;
                     if (id != null) {
-                      OneSignal.shared.setExternalUserId(id);
+                      OneSignal.login(id);
                     }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -85,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
                     );
                     final id = authResponse.user?.id;
                     if (id != null) {
-                      OneSignal.shared.setExternalUserId(id);
+                      OneSignal.login(id);
                     }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

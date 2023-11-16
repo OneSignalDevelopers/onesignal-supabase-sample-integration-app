@@ -24,11 +24,11 @@ class _LoadingButtonState extends State<LoadingButton> {
         Expanded(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 12)),
+                padding: const EdgeInsets.symmetric(vertical: 12)),
             onPressed:
                 (_isLoading || widget.onPressed == null) ? null : _loadFuture,
             child: _isLoading
-                ? SizedBox(
+                ? const SizedBox(
                     height: 22,
                     width: 22,
                     child: CircularProgressIndicator(

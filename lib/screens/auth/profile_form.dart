@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../widgets/example_scaffold.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({Key? key}) : super(key: key);
@@ -35,7 +33,7 @@ class _ProfileFormState extends State<ProfileForm> {
       final data = (await Supabase.instance.client
           .from('profiles')
           .select()
-          .match({'id': userId}).maybeSingle()) as Map?;
+          .match({'id': userId}).maybeSingle());
       if (data != null) {
         setState(() {
           _usernameController.text = data['username'];
