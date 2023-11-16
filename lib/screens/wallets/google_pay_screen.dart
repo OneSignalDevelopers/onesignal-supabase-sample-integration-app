@@ -18,6 +18,8 @@ const _paymentItems = [
 ];
 
 class GooglePayScreen extends StatefulWidget {
+  const GooglePayScreen({super.key});
+
   @override
   _GooglePayScreenState createState() => _GooglePayScreenState();
 }
@@ -41,8 +43,8 @@ class _GooglePayScreenState extends State<GooglePayScreen> {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Google Pay',
-      padding: EdgeInsets.all(16),
-      tags: ['Android', 'Pay plugin'],
+      padding: const EdgeInsets.all(16),
+      tags: const ['Android', 'Pay plugin'],
       children: [
         pay.GooglePayButton(
           paymentConfigurationAsset: 'google_pay_payment_profile.json',
@@ -56,7 +58,7 @@ class _GooglePayScreenState extends State<GooglePayScreen> {
             // 1. Add your stripe publishable key to assets/google_pay_payment_profile.json
             await debugChangedStripePublishableKey();
           },
-          childOnError: Text('Google Pay is not available in this device'),
+          childOnError: const Text('Google Pay is not available in this device'),
           onError: (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

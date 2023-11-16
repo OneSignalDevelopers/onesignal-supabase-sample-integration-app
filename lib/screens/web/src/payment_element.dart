@@ -6,6 +6,8 @@ import 'package:app/config.dart';
 import 'package:http/http.dart' as http;
 
 class PaymentElementExample extends StatefulWidget {
+  const PaymentElementExample({super.key});
+
   @override
   _ThemeCardExampleState createState() => _ThemeCardExampleState();
 }
@@ -40,9 +42,9 @@ class _ThemeCardExampleState extends State<PaymentElementExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: const Text('Flutter App'),
       ),
-      body: Column(
+      body: const Column(
         children: [
           // Container(
           //   height: 150,

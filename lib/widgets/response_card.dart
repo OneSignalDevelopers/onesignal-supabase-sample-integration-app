@@ -11,21 +11,21 @@ class ResponseCard extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             'RESPONSE',
-            style: Theme.of(context).textTheme.caption?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Theme.of(context)
                       .textTheme
-                      .caption
+                      .bodySmall
                       ?.color
                       ?.withOpacity(0.5),
                 ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(response),
         ],
       ),

@@ -39,7 +39,7 @@ class KlarnaScreen extends StatelessWidget {
 
     // 2. use the client secret to confirm the payment and handle the result.
     try {
-      final billingDetails = BillingDetails(
+      const billingDetails = BillingDetails(
         // email is mandatory
         email: 'email@stripe.com',
         address: Address(
@@ -55,13 +55,13 @@ class KlarnaScreen extends StatelessWidget {
 
       await Stripe.instance.confirmPayment(
         paymentIntentClientSecret: clientSecret,
-        data: PaymentMethodParams.klarna(
+        data: const PaymentMethodParams.klarna(
           paymentMethodData: PaymentMethodData(billingDetails: billingDetails),
         ),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Payment succesfully completed'),
         ),
       );
@@ -75,7 +75,7 @@ class KlarnaScreen extends StatelessWidget {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Unforeseen error: ${e}'),
+            content: Text('Unforeseen error: $e'),
           ),
         );
       }
@@ -86,8 +86,8 @@ class KlarnaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExampleScaffold(
       title: 'Klarna',
-      tags: ['Payment method'],
-      padding: EdgeInsets.all(16),
+      tags: const ['Payment method'],
+      padding: const EdgeInsets.all(16),
       children: [
         LoadingButton(
           onPressed: () async {
